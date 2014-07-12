@@ -1,5 +1,18 @@
 local crypt = require "crypt"
 
+-- base64
+-- http://en.wikipedia.org/wiki/Base64
+
+local base64_string = "any carnal pleasure."
+
+for i = 20, 15, -1 do
+	local s = string.sub(base64_string,1,i)
+	print(string.format("Input ends with : %s \tOutput ends with: %s \tInput has %d bytes, output hash %d bytes.",
+		s, crypt.base64encode(s), #s, #crypt.base64encode(s)))
+
+	assert(s == crypt.base64decode(crypt.base64encode(s)))
+end
+
 -- DH key exchange
 
 local secretA = crypt.randomkey()
